@@ -1,2 +1,2 @@
-# I-m-Chosen
+# Im-Chosen
 Christian Bible and Songs Projection
