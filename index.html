@@ -57,7 +57,8 @@ function openAudioEditor(s){audioSong=s;document.getElementById('audioSongName')
 function closeAudioEditor(){document.getElementById('audioEditor').classList.remove('show');audioSong=null;}
 function saveSongAudio(){if(!audioSong)return;const value=document.getElementById('audioUrlInput').value.trim();if(!value){alert('Paste a direct audio file link first.');return;}let u;try{u=new URL(value);}catch(e){alert('Please enter a valid URL.');return;}if(u.protocol!=='https:'){alert('Please use a secure HTTPS audio link.');return;}localStorage.setItem(audioKey(audioSong),u.href);closeAudioEditor();render();alert('Audio link saved in this browser. Use the player on the song card to listen.');}
 function removeSongAudio(){if(!audioSong)return;localStorage.removeItem(audioKey(audioSong));closeAudioEditor();render();}
-\nfunction saveProgram(){localStorage.setItem('im-chosen-worship-program',JSON.stringify(worshipProgram));renderProgram();}
+
+function saveProgram(){localStorage.setItem('im-chosen-worship-program',JSON.stringify(worshipProgram));renderProgram();}
 function addSongToProgram(s){if(worshipProgram.some(x=>x.type==='song'&&x.song[0]===s[0])){alert('This song is already in your programme.');return;}worshipProgram.push({type:'song',song:s});saveProgram();alert('Song added to Live Worship.');}
 function addScriptureToProgram(){const title=document.getElementById('scriptureTitle').value.trim()||'Bible Reading';const text=document.getElementById('scriptureText').value.trim();if(!text){alert('Please enter the Scripture text first.');return;}worshipProgram.push({type:'scripture',title,text});document.getElementById('scriptureTitle').value='';document.getElementById('scriptureText').value='';saveProgram();}
 function moveProgramItem(i,d){const j=i+d;if(j<0||j>=worshipProgram.length)return;[worshipProgram[i],worshipProgram[j]]=[worshipProgram[j],worshipProgram[i]];saveProgram();}
