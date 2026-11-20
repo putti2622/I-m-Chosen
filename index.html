@@ -85,7 +85,8 @@ function showMissionDoc(which){
  document.getElementById('smtcMissionTab').classList.toggle('active',smtc);
  document.getElementById('mrMissionTab').classList.toggle('active',!smtc);
 }
-\nfunction audioKey(s){return 'im-chosen-audio-'+(s[2]||s[0]);}
+
+function audioKey(s){return 'im-chosen-audio-'+(s[2]||s[0]);}
 function openAudioEditor(s){audioSong=s;document.getElementById('audioSongName').textContent=(s[2]?'#'+s[2]+' · ':'')+s[0];document.getElementById('audioUrlInput').value=localStorage.getItem(audioKey(s))||'';document.getElementById('audioEditor').classList.add('show');}
 function closeAudioEditor(){document.getElementById('audioEditor').classList.remove('show');audioSong=null;}
 function saveSongAudio(){if(!audioSong)return;const value=document.getElementById('audioUrlInput').value.trim();if(!value){alert('Paste a direct audio file link first.');return;}let u;try{u=new URL(value);}catch(e){alert('Please enter a valid URL.');return;}if(u.protocol!=='https:'){alert('Please use a secure HTTPS audio link.');return;}localStorage.setItem(audioKey(audioSong),u.href);closeAudioEditor();render();alert('Audio link saved in this browser. Use the player on the song card to listen.');}
